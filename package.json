@@ -1,0 +1,19 @@
+{
+  "name": "create-hydro-app",
+  "main": "index.js",
+  "version": "1.0.0",
+  "keywords": [
+    "hydro-js"
+  ],
+  "description": "Create hydro apps with no build configuration.",
+  "author": "Fabian Krutsch <f.krutsch@gmx.de> (https://krutsch.netlify.app/)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krutsch/create-hydro-app.git"
+  },
+  "bugs": "https://github.com/Krutsch/create-hydro-app/issues",
+  "dependencies": {
+    "chalk": "^4.1.0"
+  }
+}
