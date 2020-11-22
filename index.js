@@ -1,28 +1,42 @@
 "use strict";
-const { exec } = require("child_process");
+const util = require("util");
 const path = require("path");
 const fs = require("fs");
 const chalk = require("chalk");
+const exec = util.promisify(require("child_process").exec);
 const log = console.log;
 
 let projectName = process.argv[2];
 if (typeof projectName === "undefined") {
   projectName = "hydro-starter";
 }
-const root = path.resolve(projectName);
 
-log(`Creating a new hydro app in ${chalk.green(root)}.`);
-exec(`git clone https://github.com/Krutsch/hydro-starter ${projectName} `);
+start().then(() => log(chalk.blue("Happy coding 😊")));
 
-log(`Installing packages. This might take a while.`);
-exec(`cd ${projectName} && npm i`);
+async function start() {
+  log(`Creating a new hydro app in ${chalk.green(path.resolve(projectName))}.`);
+  await exec(
+    `git clone https://github.com/Krutsch/hydro-starter ${projectName}`
+  );
+  await installPackages();
+}
 
-fs.rm(`${projectName}/.git/`, { recursive: true, force: true }, (err) => {
-  if (err) {
-    log(err);
-    process.exit(1);
-  }
-  exec(`cd ${projectName} && git init`);
-});
+async function installPackages() {
+  log(`Installing packages. This might take a while.`);
+  await exec(`cd ${projectName} && npm i`);
+  await initGit();
+}
 
-log(chalk.blue("Happy coding 😊"));
+async function initGit() {
+  await fs.rm(
+    `${projectName}/.git/`,
+    { recursive: true, force: true, maxRetries: 2 },
+    async (err) => {
+      if (err) {
+        log(err);
+        process.exit(1);
+      }
+    }
+  );
+  await exec(`cd ${projectName} && git init`);
+}
