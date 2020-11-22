@@ -1,8 +1,7 @@
 {
   "name": "create-hydro-app",
-  "main": "index.js",
-  "bin": "index.js",
-  "version": "1.0.1",
+  "bin": "./index.js",
+  "version": "1.0.2",
   "keywords": [
     "hydro-js"
   ],
