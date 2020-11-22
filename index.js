@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 "use strict";
 const util = require("util");
 const path = require("path");
