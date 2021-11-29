@@ -14,6 +14,6 @@
   },
   "bugs": "https://github.com/Krutsch/create-hydro-app/issues",
   "dependencies": {
-    "chalk": "^4.1.0"
+    "chalk": "^5.0.0"
   }
 }
