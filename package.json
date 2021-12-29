@@ -1,9 +1,10 @@
 {
   "name": "create-hydro-app",
   "bin": "./index.js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "keywords": [
-    "hydro-js"
+    "hydro-js",
+    "cli"
   ],
   "description": "Create hydro apps with no build configuration.",
   "author": "Fabian Krutsch <f.krutsch@gmx.de> (https://krutsch.netlify.app/)",
@@ -14,6 +15,7 @@
   },
   "bugs": "https://github.com/Krutsch/create-hydro-app/issues",
   "dependencies": {
-    "chalk": "^5.0.0"
+    "await-spawn": "^4.0.2",
+    "gradient-string": "^2.0.0"
   }
 }

@@ -1,44 +1,52 @@
 #!/usr/bin/env node
 
 "use strict";
-const util = require("util");
 const path = require("path");
-const fs = require("fs");
-const chalk = require("chalk");
-const exec = util.promisify(require("child_process").exec);
-const log = console.log;
+const { rm } = require("fs/promises");
+const gradient = require("gradient-string");
+const awaitSpawn = require("await-spawn");
 
-let projectName = process.argv[2];
-if (typeof projectName === "undefined") {
-  projectName = "hydro-starter";
-}
-
-start().then(() => log(chalk.blue("Happy coding 😊")));
+const color = gradient("#4ade80", "#38bdf8");
+const projectName = process.argv[2] || "hydro-starter";
+start();
 
 async function start() {
-  log(`Creating a new hydro app in ${chalk.green(path.resolve(projectName))}.`);
-  await exec(
-    `git clone https://github.com/Krutsch/hydro-starter ${projectName}`
+  log(
+    `⚙️  Hydro CLI. Setting up a new hydro app in ${path.resolve(projectName)}.`
   );
+  const out = await awaitSpawn("git", [
+    "clone",
+    "https://github.com/Krutsch/hydro-starter",
+    projectName,
+  ]);
+  console.log(out.toString());
   await installPackages();
 }
 
 async function installPackages() {
-  log(`Installing packages. This might take a while.`);
-  await exec(`cd ${projectName} && npm i`);
+  log(`📦 Installing packages now. This might take a while.`);
+  const out = await awaitSpawn("cd", [projectName, "&& npm i"], {
+    shell: true,
+  });
+  console.log(out.toString());
   await initGit();
 }
 
 async function initGit() {
-  await fs.rm(
-    `${projectName}/.git/`,
-    { recursive: true, force: true, maxRetries: 2 },
-    async (err) => {
-      if (err) {
-        log(err);
-        process.exit(1);
-      }
+  await rm(`${projectName}/.git/`, { recursive: true, force: true });
+  await awaitSpawn(
+    "cd",
+    [
+      projectName,
+      '&& git init && git add . && git commit -am "Intial hydro-js repo"',
+    ],
+    {
+      shell: true,
     }
   );
-  await exec(`cd ${projectName} && git init`);
+  log("💙 Thank you for coding with hydro-js ⚛️");
+}
+
+function log(msg) {
+  console.log(color(msg));
 }
