@@ -7,7 +7,7 @@
     "cli"
   ],
   "description": "Create hydro apps with no build configuration.",
-  "author": "Fabian Krutsch <f.krutsch@gmx.de> (https://krutsch.netlify.app/)",
+  "author": "Fabian Klingenberg <klingenberg.fabian@gmx.de> (https://klingenberg.netlify.app/)",
   "license": "MIT",
   "repository": {
     "type": "git",
