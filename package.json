@@ -16,6 +16,6 @@
   "bugs": "https://github.com/Krutsch/create-hydro-app/issues",
   "dependencies": {
     "await-spawn": "^4.0.2",
-    "gradient-string": "^2.0.0"
+    "gradient-string": "^3.0.0"
   }
 }
