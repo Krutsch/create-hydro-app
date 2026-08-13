@@ -1,7 +1,10 @@
 {
   "name": "create-hydro-app",
   "bin": "./index.js",
-  "version": "1.0.5",
+  "version": "1.0.6",
+  "scripts": {
+    "test": "node test/cli.js"
+  },
   "keywords": [
     "hydro-js",
     "cli"
@@ -9,6 +12,9 @@
   "description": "Create hydro apps with no build configuration.",
   "author": "Fabian Klingenberg <klingenberg.fabian@gmx.de> (https://klingenberg.netlify.app/)",
   "license": "MIT",
+  "engines": {
+    "node": ">=14.14.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Krutsch/create-hydro-app.git"
